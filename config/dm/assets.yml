@@ -1,0 +1,11 @@
+js:
+
+  dmTalkPlugin:
+
+    ctrl:         ctrl
+
+css:
+
+  dmTalkPlugin:
+
+    style:        style

@@ -1,0 +1,235 @@
+/*
+ * Global structure
+ */
+
+div.dm_talk {
+  border: 1px solid #D3D3D3;
+  background: #F7F5F2;
+  font-family: 'Lucida Grande','Lucida Sans Unicode',Geneva,Verdana,Sans-Serif;
+  font-size: 12px;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+div.dm_talk ol, div.dm_talk ul, div.dm_talk li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+div.dm_talk div.dm_talk_room_wrap {
+  float: left;
+  width: 80%;
+  height: 400px;
+}
+
+div.dm_talk div.dm_talk_conversation_wrap {
+  height: 360px;
+  padding: 5px;
+}
+
+div.dm_talk div.dm_talk_new_message_wrap {
+  height: 25px;
+  padding-bottom: 5px;
+}
+
+div.dm_talk div.dm_talk_side {
+  float: left;
+  width: 20%;
+  height: 400px;
+}
+
+div.dm_talk div.dm_talk_speakers_wrap {
+  height: 390px;
+  padding: 5px;
+  padding-left: 0;
+}
+
+ /*
+  * Internal structure
+  */
+
+div.dm_talk div.dm_talk_conversation {
+  background: #fff;
+  border: 1px solid #D3D3D3;
+  border-radius-topleft: 3px;
+  -moz-border-radius-topleft: 3px;
+  -webkit-border-radius-topleft: 3px;
+  overflow: auto;
+}
+
+div.dm_talk .dm_talk_new_message {
+  height: 100%;
+  margin: 5px;
+  margin-top: 0;
+}
+
+div.dm_talk .dm_talk_new_message input {
+  background: #fff;
+  border: 1px solid #D3D3D3;
+  height: 100%;
+  padding: 0 5px;
+  border-radius-bottomleft: 3px;
+  -moz-border-radius-bottomleft: 3px;
+  -webkit-border-radius-bottomleft: 3px;
+}
+
+div.dm_talk div.dm_talk_speakers {
+  background: #fff;
+  border: 1px solid #D3D3D3;
+  border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  -webkit-border-radius: 0 3px 3px 0;
+  overflow: auto;
+}
+
+div.dm_talk div.dm_talk_tool_bar {
+  margin: 5px;
+  margin-bottom: 0;
+}
+
+div.dm_talk div.dm_talk_tool_bar button {
+  display: block;
+  float: left;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border: 1px solid #D3D3D3;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  color: #777;
+  background: #EAEAF4;
+  cursor: pointer;
+  font-size: 10px;
+}
+
+div.dm_talk div.dm_talk_tool_bar .dm_talk_my_name {
+  display: block;
+  float: left;
+  margin: 3px 10px 0 5px;
+  font-weight: bold;
+  color: #444;
+}
+
+div.dm_talk div.dm_talk_tool_bar a {
+  display: block;
+  float: left;
+  font-size: 10px;
+  color: #777;
+  margin: 4px 0 0 5px;
+}
+
+div.dm_talk div.dm_talk_tool_bar button:hover {
+  background: #FAFAFA;
+  color: #000;
+}
+
+/*
+ * Speakers list
+ */
+
+div.dm_talk div.dm_talk_speakers ul {
+   margin: 10px 0 0 5px;
+}
+
+div.dm_talk div.dm_talk_speakers li {
+  margin-bottom: 10px;
+  padding-left: 18px;
+  color: #444;
+}
+
+div.dm_talk div.dm_talk_speakers li.online {
+  background: url(../images/online.png) left center no-repeat;
+}
+div.dm_talk div.dm_talk_speakers li.offline {
+  background: url(../images/offline.png) left center no-repeat;
+}
+
+/*
+ * Message blocks
+ */
+
+div.dm_talk ol.dm_talk_blocks {
+  padding: 7px;
+  font-size: 11px;
+}
+
+div.dm_talk li.dm_talk_block {
+  margin-bottom: 7px;
+  padding: 5px;
+  border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+div.dm_talk li.dm_talk_block .speaker {
+  font-size: 10px;
+}
+
+div.dm_talk li.dm_talk_message {
+  padding-top: 5px;
+  border-top: 1px solid;
+  margin-top: 5px;
+}
+div.dm_talk li.dm_talk_message:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+div.dm_talk li.dm_talk_message .date {
+  float: right;
+  font-size: 10px;
+}
+
+/*
+ * Speaker color variations
+ */
+
+div.dm_talk li.dm_talk_speaker_bot {
+  background: #F8F8F8;
+  border: 1px solid #D4D4D4;
+  color: #666;
+}
+div.dm_talk li.dm_talk_speaker_myself {
+  border: 1px solid #BCDA7D;
+  background: #F4FAE8;
+}
+div.dm_talk li.dm_talk_speaker_other {
+  border: 1px solid #E7E391;
+  background: #FAFAE9;
+}
+
+div.dm_talk li.dm_talk_speaker_bot li.dm_talk_message {
+  margin-top: 0;
+}
+
+div.dm_talk li.dm_talk_speaker_bot .speaker,
+div.dm_talk li.dm_talk_speaker_bot .date {
+  color: #aaa;
+}
+div.dm_talk li.dm_talk_speaker_myself .speaker,
+div.dm_talk li.dm_talk_speaker_myself .date {
+  color: #9CB568;
+}
+div.dm_talk li.dm_talk_speaker_other .speaker,
+div.dm_talk li.dm_talk_speaker_other .date {
+  color: #B5AF33;
+}
+
+div.dm_talk li.dm_talk_speaker_myself li.dm_talk_message {
+  border-top-color: #E1F5B8;
+}
+li.dm_talk_speaker_other li.dm_talk_message {
+  border-top-color: #F5F1AB;
+}
+
+/*
+ * Connection form
+ */
+
+div.dm_talk .dm_talk_connection_form {
+  margin: 10px;
+}

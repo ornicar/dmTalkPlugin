@@ -1,0 +1,44 @@
+DmTalkRoom:
+  actAs:
+    Timestampable:
+      updated:
+        disabled:     true
+  columns:
+    code:             { type: string(8), notnull: true, unique: true }
+
+DmTalkSpeaker:
+  actAs:
+    Timestampable:
+      updated:
+        disabled:     true
+  columns:
+    room_id:          { type: integer, notnull: true }
+    code:             { type: string(8), notnull: true, unique: true }
+    name:             { type: string(32), notnull: true }
+    last_ping:        { type: int, notnull: true }
+  indexes:
+    room_name_unique:
+      fields:         [ name, room_id ]
+      type:           unique
+  relations:
+    Room:
+      local:          room_id
+      class:          DmTalkRoom
+      foreignAlias:   Speakers
+      onDelete:       CASCADE
+
+DmTalkMessage:
+  actAs:
+    Timestampable:
+      updated:
+        disabled:     true
+  columns:
+    room_id:          { type: integer, notnull: true }
+    speaker_name:     { type: string(32), notnull: true }
+    text:             { type: string(64000), notnull: true }
+  relations:
+    Room:
+      local:          room_id
+      class:          DmTalkRoom
+      foreignAlias:   Messages
+      onDelete:       CASCADE

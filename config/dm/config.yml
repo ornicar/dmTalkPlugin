@@ -1,0 +1,5 @@
+all:
+
+  talk:
+
+    ajax_refresh_delay:    2000        # Ajax refresh delay in milliseconds
