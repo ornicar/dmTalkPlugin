@@ -39,7 +39,7 @@ class dmTalkPluginConfiguration extends sfPluginConfiguration
     {
       if(class_exists('dmFrontLinkTagPage'))
       {
-        $speaker->say(str_replace(':', ":\n", $this->i18n->__("Give this url to invite someone to join the room: %url%", array(
+        $speaker->say(str_replace('http', "\nhttp", $this->i18n->__("Give this url to invite someone to join the room: %url%", array(
           '%url%' => $this->context->getHelper()->link($this->context->getPage())->param('r', $speaker->Room->code)->getAbsoluteHref())
         )));
       }
