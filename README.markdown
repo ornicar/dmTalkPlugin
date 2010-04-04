@@ -2,6 +2,8 @@ dmTalkPlugin provides an HTML/CSS/JS web chat.
 It requires no registration.
 The plugin is fully extensible. Only works with [Diem 5](http://diem-project.org/) installed.
 
+See the online demo: http://talk.diem-project.org/
+
 Documentation
 -------------
 
