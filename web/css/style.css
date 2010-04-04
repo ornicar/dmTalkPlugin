@@ -188,6 +188,11 @@ div.dm_talk li.dm_talk_message .date {
   font-size: 10px;
 }
 
+div.dm_talk li.dm_talk_message .to {
+  font-weight: bold;
+  margin-right: 0.5em;
+}
+
 /*
  * Speaker color variations
  */

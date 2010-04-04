@@ -8,9 +8,9 @@ abstract class PluginDmTalkSpeaker extends BaseDmTalkSpeaker
     return 'bot' === $this->get('name');
   }
 
-  public function say($message)
+  public function say($message, DmTalkSpeaker $toSpeaker = null)
   {
-    dmDb::table('DmTalkMessage')->createForSpeaker($this, $message)->save();
+    dmDb::table('DmTalkMessage')->createForSpeaker($this, $message, $toSpeaker)->save();
   }
 
   public function rename($name)

@@ -111,4 +111,37 @@ class dmTalkRoomActions extends myFrontModuleActions
     return $this->renderJson($response);
   }
 
+  // add a private message to the conversation, showing the invite url
+  public function executeInviteSomeone(sfWebRequest $request)
+  {
+    $this->forward404Unless(
+      $speaker = dmDb::table('DmTalkSpeaker')->findOneByCode($request->getParameter('s'))
+    );
+
+    $speaker->Room->botSpeaker->say(str_replace('http://', "\nhttp://", $this->getI18n()->__('Give this url to invite someone to join the room: %url%', array(
+      '%url%' => $this->getHelper()->link($this->getPage())->param('r', $speaker->Room->code)->getAbsoluteHref())
+    )), $speaker);
+
+    return $this->renderText($this->getPartial('dmTalkRoom/conversation', array(
+      'speaker' => $speaker,
+      'room'    => $speaker->Room
+    )));
+  }
+
+  // add a private message to the conversation, showing the save url
+  public function executeSaveConversation(sfWebRequest $request)
+  {
+    $this->forward404Unless(
+      $speaker = dmDb::table('DmTalkSpeaker')->findOneByCode($request->getParameter('s'))
+    );
+
+    $speaker->Room->botSpeaker->say(str_replace('http://', "\nhttp://", $this->getI18n()->__('Keep this url to go back to this room later: %url%', array(
+      '%url%' => $this->getHelper()->link($this->getPage())->param('s', $speaker->code)->getAbsoluteHref())
+    )), $speaker);
+
+    return $this->renderText($this->getPartial('dmTalkRoom/conversation', array(
+      'speaker' => $speaker,
+      'room'    => $speaker->Room
+    )));
+  }
 }

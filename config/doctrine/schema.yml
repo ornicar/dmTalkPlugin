@@ -15,7 +15,7 @@ DmTalkSpeaker:
     room_id:          { type: integer, notnull: true }
     code:             { type: string(8), notnull: true, unique: true }
     name:             { type: string(32), notnull: true }
-    last_ping:        { type: int, notnull: true }
+    last_ping:        { type: integer, notnull: true }
   indexes:
     room_name_unique:
       fields:         [ name, room_id ]
@@ -36,9 +36,15 @@ DmTalkMessage:
     room_id:          { type: integer, notnull: true }
     speaker_name:     { type: string(32), notnull: true }
     text:             { type: string(64000), notnull: true }
+    to_speaker_id:    { type: integer, notnull: false }
   relations:
     Room:
       local:          room_id
       class:          DmTalkRoom
       foreignAlias:   Messages
       onDelete:       CASCADE
+    ToSpeaker:
+      local:          to_speaker_id
+      class:          DmTalkSpeaker
+      foreignAlias:   PrivateMessages
+      onDelete:       SET NULL

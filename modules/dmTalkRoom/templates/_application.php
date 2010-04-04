@@ -11,18 +11,14 @@ if(isset($connectionForm))
 
 // pass json metadata to the JavaScript
 $json = array(
-  'invite_someone_message' => __('Give this url to invite someone to join the room: %url%', array(
-    '%url%' => _link($dm_page)->param('r', $room->code)->getAbsoluteHref())
-  ),
   'change_nickname_message' => __('Please enter your nickname'),
   'change_nickname_url' => _link('+/dmTalkRoom/changeNickname')->param('s', $speaker->code)->getHref(),
-  'save_conversation_message' => __('Keep this url to go back to this room later: %url%', array(
-    '%url%' => _link($dm_page)->param('s', $speaker->code)->getAbsoluteHref())
-  ),
   'speaker_code' => $speaker->code,
   'refresh_url' => _link('+/dmTalkRoom/refresh')->param('s', $speaker->code)->getHref(),
   'new_conversation_url' => _link($dm_page)->getHref(),
-  'ajax_refresh_delay' => sfConfig::get('dm_talk_ajax_refresh_delay', 2000)
+  'ajax_refresh_delay' => sfConfig::get('dm_talk_ajax_refresh_delay', 2000),
+  'invite_someone_url' => _link('+/dmTalkRoom/inviteSomeone')->param('s', $speaker->code)->getHref(),
+  'save_conversation_url' => _link('+/dmTalkRoom/saveConversation')->param('s', $speaker->code)->getHref()
 );
 
 echo _tag('div.dm_talk', array('json' => $json),

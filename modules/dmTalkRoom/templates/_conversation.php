@@ -2,7 +2,7 @@
 
 echo _open('ol.dm_talk_blocks');
 
-foreach($room->Blocks as $block)
+foreach($room->getBlocksForSpeaker($speaker) as $block)
 {
   echo _open('li.dm_talk_block.'.$block->getCssClass($speaker));
 
@@ -17,7 +17,10 @@ foreach($room->Blocks as $block)
     {
       echo _tag('li.dm_talk_message',
         _tag('span.date', date('H:i', strtotime($message->get('created_at')))).
-        nl2br(escape($message->get('text')))
+        _tag('span.text',
+          ($message->ToSpeaker ? _tag('span.to', $message->ToSpeaker->name) : '').
+          nl2br(escape($message->get('text')))
+        )
       );
     }
 

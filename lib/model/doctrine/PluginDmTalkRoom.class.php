@@ -3,12 +3,12 @@
 abstract class PluginDmTalkRoom extends BaseDmTalkRoom
 {
   
-  public function getBlocks()
+  public function getBlocksForSpeaker(DmTalkSpeaker $speaker)
   {
     $blocks     = array();
     $speakerName  = null;
 
-    foreach($this->Messages as $message)
+    foreach($this->getMessagesForSpeaker($speaker) as $message)
     {
       if('bot' === $message->get('speaker_name') || $speakerName !== $message->get('speaker_name'))
       {
@@ -20,6 +20,23 @@ abstract class PluginDmTalkRoom extends BaseDmTalkRoom
     }
 
     return $blocks;
+  }
+
+  public function getMessagesForSpeaker(DmTalkSpeaker $speaker)
+  {
+    $messages   = $this->get('Messages');
+    $speakerId  = $speaker->get('id');
+
+    foreach($messages as $index => $message)
+    {
+      $toSpeakerId = $message->get('to_speaker_id');
+      if($toSpeakerId && $toSpeakerId != $speakerId)
+      {
+        unset($messages[$index]);
+      }
+    }
+
+    return $messages;
   }
 
   public function getHumanSpeakers()

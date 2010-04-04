@@ -24,12 +24,16 @@
             if(data.hash)
             {
               hash = data.hash;
-              $conversation.html(data.conversation)[0].scrollTop = 9999999;
+              updateConversation(data.conversation);
             }
             $speakers.html(data.speakers);
             setTimeout(refresh, metadata.ajax_refresh_delay);
           }
         });
+      },
+      updateConversation = function(html)
+      {
+        $conversation.html(html)[0].scrollTop = 9999999;
       };
 
       // styling
@@ -47,9 +51,9 @@
         if(text = $.trim($input.val()))
         {
           $input.val('');
-          $.post($form.attr('action'), { text: text }, function(conversation)
+          $.post($form.attr('action'), { text: text }, function(html)
           {
-            $conversation.html(conversation)[0].scrollTop = 9999999;
+              updateConversation(html);
           });
         }
 
@@ -78,13 +82,19 @@
       // send an invitation
       $toolbar.find('button.dm_talk_invite_someone').click(function()
       {
-        alert(metadata.invite_someone_message);
+        $.get(metadata.invite_someone_url, function(html)
+        {
+          updateConversation(html);
+        });
       })
 
       // save the conversation
       $toolbar.find('button.dm_talk_save_conversation').click(function()
       {
-        alert(metadata.save_conversation_message);
+        $.get(metadata.save_conversation_url, function(html)
+        {
+          updateConversation(html);
+        });
       });
     });
   });
