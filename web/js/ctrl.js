@@ -57,7 +57,7 @@
       // change nickname
       $toolbar.find('button.dm_talk_change_nickname').click(function()
       {
-        if(nickname = prompt(metadata.change_nickname_message))
+        if(nickname = $.trim(prompt(metadata.change_nickname_message)))
         {
           $.post(metadata.change_nickname_url, { nickname: nickname }, function(msg)
           {
