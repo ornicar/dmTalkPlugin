@@ -49,10 +49,10 @@ class dmTalkRoomActions extends myFrontModuleActions
 
     $speaker->say($text);
 
-    return $this->renderText($this->getPartial('dmTalkRoom/conversation', array(
-      'speaker' => $speaker,
-      'room'    => $speaker->Room
-    )));
+    return $this->renderJson(array(
+      'hash' => $speaker->Room->hash,
+      'html' => $this->renderConversation($speaker)
+    ));
   }
 
   // change the user nickname
@@ -97,10 +97,7 @@ class dmTalkRoomActions extends myFrontModuleActions
     if($newHash != $hash)
     {
       $response['hash'] = $newHash;
-      $response['conversation'] = $this->getPartial('dmTalkRoom/conversation', array(
-        'speaker' => $speaker,
-        'room'    => $room
-      ));
+      $response['html'] = $this->renderConversation($speaker);
     }
 
     $response['speakers'] = $this->getPartial('dmTalkRoom/speakers', array(
@@ -122,10 +119,10 @@ class dmTalkRoomActions extends myFrontModuleActions
       '%url%' => $this->getHelper()->link($this->getPage())->param('r', $speaker->Room->code)->getAbsoluteHref())
     )), $speaker);
 
-    return $this->renderText($this->getPartial('dmTalkRoom/conversation', array(
-      'speaker' => $speaker,
-      'room'    => $speaker->Room
-    )));
+    return $this->renderJson(array(
+      'hash' => $speaker->Room->hash,
+      'html' => $this->renderConversation($speaker)
+    ));
   }
 
   // add a private message to the conversation, showing the save url
@@ -139,9 +136,17 @@ class dmTalkRoomActions extends myFrontModuleActions
       '%url%' => $this->getHelper()->link($this->getPage())->param('s', $speaker->code)->getAbsoluteHref())
     )), $speaker);
 
-    return $this->renderText($this->getPartial('dmTalkRoom/conversation', array(
+    return $this->renderJson(array(
+      'hash' => $speaker->Room->hash,
+      'html' => $this->renderConversation($speaker)
+    ));
+  }
+
+  protected function renderConversation(DmTalkSpeaker $speaker)
+  {
+    return $this->getPartial('dmTalkRoom/conversation', array(
       'speaker' => $speaker,
       'room'    => $speaker->Room
-    )));
+    ));
   }
 }
