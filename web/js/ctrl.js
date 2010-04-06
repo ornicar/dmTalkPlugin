@@ -15,21 +15,16 @@
       hash          = 0,
       refresh       = function()
       {
-        $.ajax({
-          dataType: 'json',
-          url:      metadata.refresh_url,
-          data:     { hash:  hash },
-          success:  function(data)
+        $.get(metadata.refresh_url, { hash:  hash }, function(data)
+        {
+          if(data.hash)
           {
-            if(data.hash)
-            {
-              hash = data.hash;
-              updateConversation(data.conversation);
-            }
-            $speakers.html(data.speakers);
-            setTimeout(refresh, metadata.ajax_refresh_delay);
+            hash = data.hash;
+            updateConversation(data.conversation);
           }
-        });
+          $speakers.html(data.speakers);
+          setTimeout(refresh, metadata.ajax_refresh_delay);
+        }, 'json');
       },
       updateConversation = function(html)
       {
@@ -53,10 +48,9 @@
           $input.val('');
           $.post($form.attr('action'), { text: text }, function(html)
           {
-              updateConversation(html);
+            updateConversation(html);
           });
         }
-
         return false;
       });
 
@@ -65,16 +59,9 @@
       {
         if(nickname = prompt(metadata.change_nickname_message))
         {
-          $.post(metadata.change_nickname_url, { nickname: nickname }, function(message)
+          $.post(metadata.change_nickname_url, { nickname: nickname }, function(msg)
           {
-            if(message != 'ok')
-            {
-              alert(message);
-            }
-            else
-            {
-              $toolbar.find('.dm_talk_my_name').text(nickname);
-            }
+            msg == 'ok' ? $toolbar.find('.dm_talk_my_name').text(nickname) : alert(msg);
           });
         }
       });
@@ -86,7 +73,7 @@
         {
           updateConversation(html);
         });
-      })
+      });
 
       // save the conversation
       $toolbar.find('button.dm_talk_save_conversation').click(function()
