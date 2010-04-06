@@ -1,4 +1,5 @@
 <?php
+use_helper('Text');
 
 echo _open('ol.dm_talk_blocks');
 
@@ -19,7 +20,7 @@ foreach($room->getBlocksForSpeaker($speaker) as $block)
         _tag('span.date', date('H:i', strtotime($message->get('created_at')))).
         _tag('span.text',
           ($message->ToSpeaker ? _tag('span.to', $message->ToSpeaker->name) : '').
-          nl2br(escape($message->get('text')))
+          auto_link_text(nl2br(escape($message->get('text'))), 'urls')
         )
       );
     }
